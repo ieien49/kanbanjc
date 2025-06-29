@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Kanban TODO</title>
+
+  <!-- Scripts essentiels - NE PAS MODIFIER -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
+  <script src="https://docs.getgrist.com/grist-plugin-api.js"></script>
+  <!-- Ajout de la librairie pour les confettis -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <link rel="stylesheet" href="styles.min.css">
+</head>
+<body>
+  <div id="conteneur-kanban" class="kanban visible"></div>
+  <div id="popup-todo" class="popup">
+    <div class="popup-header">
+      <h2 class="popup-title"></h2>
+      <button class="bouton-fermer" onclick="fermerPopup()">×</button>
+    </div>
+    <div class="popup-content"></div>
+  </div>
+  <div id="config-kanban" class="popup-content config visible">
+    <div class="field-row">
+      <div class="field"><button id="save" class="field-button" onclick="saveOption()">Appliquer</button></div>
+      <div class="field"><button id="close" class="field-button" onclick="closeConfig()">Fermer</button></div>
+    </div>
+    <div class="entete-colonne" style="background-color: #27a658;">
+      <div class="titre-statut">
+        Structure
+      </div>
+    </div>
+    <div class="field-row">
+      <div class="field">
+        <label class="field-label">Colonnes :</label>
+        <textarea id="liste-colonnes" class="field-textarea auto-expand" oninput="this.style.height = ''; this.style.height = this.scrollHeight + 'px'"></textarea>
+      </div>
+    </div>
+    <div class="field-row">
+      <div class="field">
+        <label class="field-label">Références de projet (liste séparées par des ";" ou $idTable.idColonne) :</label>
+        <input type="text" id="liste-ref" class="field-input" />
+      </div>
+    </div>
+    <div class="field-row">
+      <div class="field">
+        <label class="field-label">Types de tâche (liste séparées par des ";" ou $idTable.idColonne) :</label>
+        <input type="text" id="liste-types" class="field-input" />
+      </div>
+    </div>
+    <div class="field-row">
+      <div class="field">
+        <label class="field-label">Responsables (liste séparées par des ";" ou $idTable.idColonne) :</label>
+        <input type="text" id="liste-personnes" class="field-input" />
+      </div>
+    </div>
+
+    <div class="entete-colonne" style="background-color: #27a658;">
+      <div class="titre-statut">
+        Affichage
+      </div>
+    </div>
+    <div class="field-row">
+      <div class="field">        
+        <input type="checkbox" id="card-rotation" class="field-input"><label class="field-label-checkbox">Ajouter un effet de rotation sur les post-it</label></input>
+      </div>
+      <div class="field">        
+        <input type="checkbox" id="card-compact" class="field-input"><label class="field-label-checkbox">Avoir un affichage plus compact des cartes</label></input>
+      </div>
+      <div class="field">        
+        <input type="checkbox" id="is-readonly" class="field-input"><label class="field-label-checkbox">Kanban en lecture seule</label></input>
+      </div>
+    </div>
+  </div>
+  <script src="widget.min.js"></script>
+</body>
+</html>
